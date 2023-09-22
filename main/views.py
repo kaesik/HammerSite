@@ -64,8 +64,10 @@ def logout_user(request):
     return redirect('home')
 
 
+@login_required(login_url='login')
 def user_profile(request):
     title = 'User Profile'
+
     context = {'title': title}
     return render(request, 'main/user-profile.html', context)
 
@@ -73,6 +75,7 @@ def user_profile(request):
 @login_required(login_url='login')
 def user_profile_settings(request):
     title = 'User Profile Settings'
+
     context = {'title': title}
     return render(request, 'main/user-profile-settings.html', context)
 

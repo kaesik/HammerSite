@@ -11,7 +11,7 @@
                     NProgress.configure({ showSpinner: false });
                     NProgress.start();
                 </script>
-        <div id="toaster"></div>
+{#        <div id="toaster"></div>#}
         <div class="wrapper">
 
             <!-- left sidebar -->
@@ -24,10 +24,8 @@
 
                 <!-- main body -->
                 <div class="content-wrapper">
-                    <div class="content">
-                        {% block content %}
-                        {% endblock %}
-                    </div>
+                    {% block content %}
+                    {% endblock %}
                 </div>
 
                 <!-- footer -->

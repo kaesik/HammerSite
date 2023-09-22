@@ -1,6 +1,39 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>Profile Settings</h1>
-    <p>user profile settings</p>
+
+<div class="content">
+    <div class="card card-default card-profile">
+        <div class="card-header-bg" style=""></div>
+        <div class="card-body card-profile-body">
+            <div class="profile-avata">
+            <img class="rounded-circle" src="{{ request.user.avatar.url }}" alt="Avatar Image" width="200rem">
+                {% if request.user.first_name and request.user.last_name %}
+                    <span class="h5 d-block mt-3 mb-2">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+                    <span class="d-block">{{ request.user.username }}</span>
+                {% elif request.user.first_name %}
+                    <span class="h5 d-block mt-3 mb-2">{{ request.user.first_name }}</span>
+                    <span class="d-block">{{ request.user.username }}</span>
+                {% else %}
+                    <span class="h5 d-block mt-3 mb-2">{{ request.user.username }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-footer card-profile-footer">
+            <ul class="nav nav-border-top justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'user-profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'user-profile-settings' %}">Settings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+    {% include 'maintenance.html' %}
+    </div>
+</div>
+
 {% endblock %}
