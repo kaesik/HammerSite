@@ -6,10 +6,27 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import User
 from .forms import UserForm, MyUserCreationForm
+import pyrebase
+import os
+
+
+firebaseConfig = {
+    'apiKey': os.environ.get('FIREBASE_API_KEY'),
+    'authDomain': "wh-db-72f36.firebaseapp.com",
+    'databaseURL': 'https://wh-db-72f36-default-rtdb.europe-west1.firebasedatabase.app/',
+    'projectId': "wh-db-72f36",
+    'storageBucket': "wh-db-72f36.appspot.com",
+    'messagingSenderId': "334358927008",
+    'appId': "1:334358927008:web:700f4e34f27aa06df6dbc5",
+}
+firebase = pyrebase.initialize_app(firebaseConfig)
+auth = firebase.auth()
+db = firebase.database()
 
 
 def home_page(request):
     title = 'HammerSite'
+
     context = {'title': title}
     return render(request, 'main/home.html', context)
 
