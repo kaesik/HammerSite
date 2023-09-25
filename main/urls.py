@@ -15,4 +15,6 @@ urlpatterns = [
     path('user-account-settings/', views.user_account_settings, name='user-account-settings'),
 
     path('other/', views.other, name='other'),
+
+    path('list/items/', views.list_items, name='list-items'),
 ]

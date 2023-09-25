@@ -118,3 +118,9 @@ def user_account_settings(request):
 def other(request):
     context = {}
     return render(request, 'main/!usefull-htmls.html', context)
+
+def list_items(request):
+    page = 'items'
+    items = db.child('items').get()
+    context = {'page': page, 'items': items}
+    return render(request, 'main/list.html', context)
