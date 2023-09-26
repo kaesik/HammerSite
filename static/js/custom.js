@@ -363,8 +363,9 @@ $(document).ready(function () {
 
   /*======== 14. DATA TABLE ========*/
   var productsTable = $("#productsTable");
-  if (productsTable.length != 0) {
+  if (productsTable.length =! 0) {
     productsTable.DataTable({
+      searching: true,
       info: false,
       lengthChange: false,
       lengthMenu: [
@@ -382,6 +383,7 @@ $(document).ready(function () {
       language: {
         search: "_INPUT_",
         searchPlaceholder: "Search...",
+        searching: false,
       },
     });
   }

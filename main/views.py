@@ -6,22 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import User
 from .forms import UserForm, MyUserCreationForm
-import pyrebase
-import os
-
-
-firebaseConfig = {
-    'apiKey': os.environ.get('FIREBASE_API_KEY'),
-    'authDomain': "wh-db-72f36.firebaseapp.com",
-    'databaseURL': 'https://wh-db-72f36-default-rtdb.europe-west1.firebasedatabase.app/',
-    'projectId': "wh-db-72f36",
-    'storageBucket': "wh-db-72f36.appspot.com",
-    'messagingSenderId': "334358927008",
-    'appId': "1:334358927008:web:700f4e34f27aa06df6dbc5",
-}
-firebase = pyrebase.initialize_app(firebaseConfig)
-auth = firebase.auth()
-db = firebase.database()
+from .database import *
 
 
 def home_page(request):
@@ -119,8 +104,19 @@ def other(request):
     context = {}
     return render(request, 'main/!usefull-htmls.html', context)
 
+
 def list_items(request):
     page = 'items'
-    items = db.child('items').get()
+
+    items = db_weapons
+
     context = {'page': page, 'items': items}
     return render(request, 'main/list.html', context)
+
+
+def item(request, item_name):
+    page = 'item'
+    item = db_weapons[item_name]
+
+    context = {'page': page, 'item': item}
+    return render(request, 'main/item.html', context)
