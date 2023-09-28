@@ -4,15 +4,17 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User
+from .models import User, Item
 from .forms import UserForm, MyUserCreationForm
+from .filters import ItemFilter
 from .database import *
 
 
 def home_page(request):
     title = 'HammerSite'
+    weapons = [item.val()['name'] for item in db_weapons]
 
-    context = {'title': title}
+    context = {'title': title, 'weapons': weapons}
     return render(request, 'main/home.html', context)
 
 
@@ -100,17 +102,34 @@ def user_account_settings(request):
     return render(request, 'main/user-account-settings.html', context)
 
 
-def other(request):
-    context = {}
-    return render(request, 'main/!usefull-htmls.html', context)
-
-
 def list_items(request):
+    def create_item(request, item):
+        name = item.val()['name']
+        group = item.val()['group']
+        type = item.val()['type']
+        source = item.val()['source']
+
+        created_item = Item.objects.update_or_create (
+            id=item.key(),
+            defaults={
+                'name': name,
+                'group': group,
+                'type': type,
+                'source': source
+            }
+        )
+
     page = 'items'
 
     items = db_weapons
+    for item in items:
+        create_item(request, item)
+    items = Item.objects.all()
 
-    context = {'page': page, 'items': items}
+    items_filter = ItemFilter(request.GET, queryset=items)
+    items = items_filter.qs
+
+    context = {'page': page, 'items': items, 'items_filter': items_filter}
     return render(request, 'main/list.html', context)
 
 

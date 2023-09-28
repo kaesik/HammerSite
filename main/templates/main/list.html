@@ -1,70 +1,65 @@
 {% extends 'main.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
-<div class="content">
+    <div class="content">
 
-{% if page == "items" %}
+        {% if page == "items" %}
 
-<div class="card card-default">
-  <div class="card-header">
-    <h2>Items</h2>
-  </div>
-  <div class="card-body">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h2>Items</h2>
+                </div>
+                <div class="card-body">
 
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" placeholder="Name">
-      </div>
+                    <form method="GET">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            {% for field in items_filter.form %}
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="{{ field.name }}">{{ field.name.capitalize }}</label>
+                                        {{ field|attr:"class:form-control" }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="col-sm-12">
+                                <div class="form-group d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-hover table-product" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>group</th>
+                            <th>type</th>
+                            <th>source</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in items %}
+                            {% if item.name %}
+                                <tr>
+                                    <td><a href="#">{{ item.name }}</a></td>
+                                    <td>{{ item.group }}</td>
+                                    <td>{{ item.type }}</td>
+                                    <td>{{ item.source }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        {% endif %}
+
     </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="group">Group</label>
-        <input type="text" class="form-control" placeholder="Group">
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="type">Type</label>
-        <input type="text" class="form-control" placeholder="Type">
-      </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="form-group">
-        <label for="source">Source</label>
-        <input type="text" class="form-control" placeholder="Source">
-      </div>
-    </div>
-  </div>
-<hr>
-
-    <table class="table table-hover table-product" style="width:100%">
-      <thead>
-        <tr>
-          <th>name</th>
-          <th>group</th>
-          <th>type</th>
-          <th>source</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for item in items %}
-        <tr>
-          <td><a href="#">{{ item.name.capitalize }}</a></td>
-          <td>{{ item.group.capitalize }}</td>
-          <td>{{ item.type.capitalize }}</td>
-          <td>{{ item.source }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-</div>
-
-{% endif %}
-
-</div>
 
 {% endblock %}

@@ -15,6 +15,6 @@ auth = firebase.auth()
 db = firebase.database()
 
 db_items = db.child('items').get()
-db_ammunition = [item.val() for item in db.child('items').child('ammunition').get()]
-db_armor = [item.val() for item in db.child('items').child('armors').get()]
-db_weapons = [item.val() for item in db.child('items').child('weapons').get()]
+db_ammunition = [item for item in db.child('items').child('ammunition').get()]
+db_armor = [item for item in db.child('items').child('armors').get()]
+db_weapons = [item for item in db.child('items').child('weapons').get()]

@@ -6,10 +6,9 @@
         <h1>Main Page</h1>
         <hr>
         {% for thing in weapons %}
-        <p>{{ thing.val }}</p>
+            <p>{{ thing }}</p>
         {% endfor %}
         <hr>
-        <a href="{% url 'other' %}">Other</a>
     </div>
 
 {% endblock %}
