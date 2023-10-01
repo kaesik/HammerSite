@@ -14,7 +14,6 @@ class Item(models.Model):
     id = models.CharField(max_length=200, primary_key=True)
     name = models.CharField(max_length=200, null=True)
     group = models.CharField(max_length=200, null=True)
-    type = models.CharField(max_length=200, null=True)
     source = models.CharField(max_length=200, null=True)
 
     def __str__(self):

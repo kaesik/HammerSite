@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load filter_tags %}
 {% load widget_tweaks %}
 
 {% block content %}
@@ -25,7 +26,7 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <div class="col-sm-12">
+                            <div class="col-sm-3">
                                 <div class="form-group d-flex align-items-center justify-content-center">
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </div>
@@ -38,7 +39,6 @@
                         <tr>
                             <th>name</th>
                             <th>group</th>
-                            <th>type</th>
                             <th>source</th>
                         </tr>
                         </thead>
@@ -46,10 +46,15 @@
                         {% for item in items %}
                             {% if item.name %}
                                 <tr>
-                                    <td><a href="#">{{ item.name }}</a></td>
-                                    <td>{{ item.group }}</td>
-                                    <td>{{ item.type }}</td>
-                                    <td>{{ item.source }}</td>
+                                    <td><a href="{% url 'item' item.id %}">{{ item.name }}</a></td>
+                                    <td>
+                                        {% with item.group|split:"," as groups %}
+                                            {% for group in groups %}
+                                                <a href="#">{{ group }}</a>
+                                            {% endfor %}
+                                        {% endwith %}
+                                    </td>
+                                    <td><a href="#">{{ item.source }}</a></td>
                                 </tr>
                             {% endif %}
                         {% endfor %}

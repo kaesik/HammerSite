@@ -14,7 +14,21 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 db = firebase.database()
 
-db_items = db.child('items').get()
-db_ammunition = [item for item in db.child('items').child('ammunition').get()]
-db_armor = [item for item in db.child('items').child('armors').get()]
-db_weapons = [item for item in db.child('items').child('weapons').get()]
+#ITEMS
+db_items = []
+for group in [
+        group.val() for group in
+        db.child('en').child('wfrp').child('items').get()
+]:
+    for type in group:
+        if type == 'melee' or type == 'ranged':
+            for subtype in group[type]:
+                for item in group[type][subtype]:
+                    db_items.append(group[type][subtype][item])
+        else:
+            for item in group[type]:
+                db_items.append(group[type][item])
+
+
+# db_armor = [item for item in db.child('items').child('armors').get()]
+# db_weapons = [item for item in db.child('items').child('weapons').get()]

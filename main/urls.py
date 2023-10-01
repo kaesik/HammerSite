@@ -15,4 +15,5 @@ urlpatterns = [
     path('user-account-settings/', views.user_account_settings, name='user-account-settings'),
 
     path('list/items/', views.list_items, name='list-items'),
+    path('list/items/?<str:id>', views.item, name='item'),
 ]

@@ -12,9 +12,12 @@ from .database import *
 
 def home_page(request):
     title = 'HammerSite'
-    weapons = [item.val()['name'] for item in db_weapons]
+    list = db_items
+    for thing in db_items:
+        if "bow" in thing:
+            list = thing
 
-    context = {'title': title, 'weapons': weapons}
+    context = {'title': title, 'list': list}
     return render(request, 'main/home.html', context)
 
 
@@ -104,24 +107,23 @@ def user_account_settings(request):
 
 def list_items(request):
     def create_item(request, item):
-        name = item.val()['name']
-        group = item.val()['group']
-        type = item.val()['type']
-        source = item.val()['source']
+        id = item['id']
+        name = item['name']
+        group = item['group']
+        source = item['source']
 
-        created_item = Item.objects.update_or_create (
-            id=item.key(),
+        created_item = Item.objects.update_or_create(
+            id=id,
             defaults={
                 'name': name,
                 'group': group,
-                'type': type,
                 'source': source
             }
         )
 
     page = 'items'
 
-    items = db_weapons
+    items = db_items
     for item in items:
         create_item(request, item)
     items = Item.objects.all()
@@ -130,12 +132,12 @@ def list_items(request):
     items = items_filter.qs
 
     context = {'page': page, 'items': items, 'items_filter': items_filter}
-    return render(request, 'main/list.html', context)
+    return render(request, 'main/items/item_list.html', context)
 
 
-def item(request, item_name):
+def item(request, id):
     page = 'item'
-    item = db_weapons[item_name]
+    item = db_items[id]
 
     context = {'page': page, 'item': item}
-    return render(request, 'main/item.html', context)
+    return render(request, 'main/items/item.html', context)
