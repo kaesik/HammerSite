@@ -28,7 +28,6 @@ INSTALLED_APPS = [
 
     'django_filters',
     'widget_tweaks',
-    'rest_framework',
 
     'main.apps.MainConfig',
 ]
@@ -75,8 +74,12 @@ WSGI_APPLICATION = 'HammerSite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'db.cfdunsxrpaegpepmkrfy.supabase.co',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': os.environ.get('SQL_PASSWORD'),
+        'PORT': os.environ.get('SQL_PORT'),
     }
 }
 

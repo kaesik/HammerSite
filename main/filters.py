@@ -9,6 +9,6 @@ class ItemFilter(django_filters.FilterSet):
     source = CharFilter(field_name='source', lookup_expr='icontains')
 
     class Meta:
-        model = Item
+        model = ItemWeapon
         fields = '__all__'
         exclude = ['id']

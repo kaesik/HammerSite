@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User, Item
+from .models import *
 from .forms import UserForm, MyUserCreationForm
 from .filters import ItemFilter
 from .database import *
