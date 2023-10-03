@@ -8,14 +8,12 @@ from .models import *
 from .forms import UserForm, MyUserCreationForm
 from .filters import ItemFilter
 from .database import *
+from itertools import chain
 
 
 def home_page(request):
     title = 'HammerSite'
     list = db_items
-    for thing in db_items:
-        if "bow" in thing:
-            list = thing
 
     context = {'title': title, 'list': list}
     return render(request, 'main/home.html', context)
@@ -106,30 +104,12 @@ def user_account_settings(request):
 
 
 def list_items(request):
-    def create_item(request, item):
-        id = item['id']
-        name = item['name']
-        group = item['group']
-        source = item['source']
-
-        created_item = Item.objects.update_or_create(
-            id=id,
-            defaults={
-                'name': name,
-                'group': group,
-                'source': source
-            }
-        )
-
     page = 'items'
 
-    items = db_items
-    for item in items:
-        create_item(request, item)
-    items = Item.objects.all()
-
-    items_filter = ItemFilter(request.GET, queryset=items)
+    items_filter = ItemFilter(request.GET, queryset=ItemWeapon.objects.all())
     items = items_filter.qs
+
+    print(db_items)
 
     context = {'page': page, 'items': items, 'items_filter': items_filter}
     return render(request, 'main/items/item_list.html', context)
@@ -137,7 +117,8 @@ def list_items(request):
 
 def item(request, id):
     page = 'item'
-    item = db_items[id]
+
+    item = db_items.objects.get(id=id)
 
     context = {'page': page, 'item': item}
     return render(request, 'main/items/item.html', context)

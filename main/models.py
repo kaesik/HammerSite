@@ -1,3 +1,5 @@
+from itertools import chain
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -24,27 +26,77 @@ class Item(models.Model):
         return self.name
 
 
-class ItemWeapon(Item):
+class ItemWeapon(models.Model):
+    id = models.CharField(max_length=200, primary_key=True)
+    name = models.CharField(max_length=200, null=True)
+    group = models.CharField(max_length=200, null=True)
+    source = models.CharField(max_length=200, null=True)
+    availability = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    encumbrance = models.CharField(max_length=200, null=True)
+    price = models.CharField(max_length=200, null=True)
     type = models.CharField(max_length=200, null=True)
     damage = models.CharField(max_length=200, null=True)
     is_2h = models.BooleanField(null=True)
     range = models.CharField(max_length=200, null=True)
     qualities_and_flaws = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.name
 
-class ItemArmour(Item):
+
+class ItemArmour(models.Model):
+    id = models.CharField(max_length=200, primary_key=True)
+    name = models.CharField(max_length=200, null=True)
+    group = models.CharField(max_length=200, null=True)
+    source = models.CharField(max_length=200, null=True)
+    availability = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    encumbrance = models.CharField(max_length=200, null=True)
+    price = models.CharField(max_length=200, null=True)
     locations = models.CharField(max_length=200, null=True)
     penalty = models.CharField(max_length=200, null=True)
     ap = models.CharField(max_length=200, null=True)
     qualities_and_flaws = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.name
 
-class ItemAmmunition(Item):
+
+class ItemAmmunition(models.Model):
+    id = models.CharField(max_length=200, primary_key=True)
+    name = models.CharField(max_length=200, null=True)
+    group = models.CharField(max_length=200, null=True)
+    source = models.CharField(max_length=200, null=True)
+    availability = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    encumbrance = models.CharField(max_length=200, null=True)
+    price = models.CharField(max_length=200, null=True)
     damage = models.CharField(max_length=200, null=True)
     quantity = models.CharField(max_length=200, null=True)
     range = models.CharField(max_length=200, null=True)
     qualities_and_flaws = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.name
 
-class ItemOther(Item):
+
+class ItemOther(models.Model):
+    id = models.CharField(max_length=200, primary_key=True)
+    name = models.CharField(max_length=200, null=True)
+    group = models.CharField(max_length=200, null=True)
+    source = models.CharField(max_length=200, null=True)
+    availability = models.CharField(max_length=200, null=True)
+    description = models.CharField(max_length=200, null=True)
+    encumbrance = models.CharField(max_length=200, null=True)
+    price = models.CharField(max_length=200, null=True)
     carries = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+Items = chain(ItemWeapon.objects.all(),
+                 ItemArmour.objects.all(),
+                 ItemAmmunition.objects.all(),
+                 ItemOther.objects.all())

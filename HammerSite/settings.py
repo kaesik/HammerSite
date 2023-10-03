@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'HammerSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'db.hojvnagoxpblknntxvty.supabase.co',
+        'HOST': os.environ.get('SQL_HOST'),
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': os.environ.get('SQL_PASSWORD'),
