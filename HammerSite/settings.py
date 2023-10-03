@@ -1,5 +1,8 @@
 from pathlib import Path
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,11 +78,11 @@ WSGI_APPLICATION = 'HammerSite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'db.cfdunsxrpaegpepmkrfy.supabase.co',
+        'HOST': 'db.hojvnagoxpblknntxvty.supabase.co',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': os.environ.get('SQL_PASSWORD'),
-        'PORT': os.environ.get('SQL_PORT'),
+        'PORT': '5432',
     }
 }
 
