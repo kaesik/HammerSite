@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django_filters',
+    'django_tables2',
     'widget_tweaks',
 
     'main.apps.MainConfig',

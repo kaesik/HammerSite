@@ -4976,6 +4976,7 @@ a.badge-warning:hover, a.badge-warning:focus {
   color: #2f2f2f;
   background-color: #cb9d00;
 }
+
 a.badge-warning:focus, a.badge-warning.focus {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(254, 196, 0, 0.5);

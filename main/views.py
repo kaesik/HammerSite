@@ -7,15 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import UserForm, MyUserCreationForm
 from .filters import ItemFilter
-from .database import *
 from itertools import chain
 
 
 def home_page(request):
     title = 'HammerSite'
-    list = db_items
 
-    context = {'title': title, 'list': list}
+    context = {'title': title}
     return render(request, 'main/home.html', context)
 
 
@@ -106,19 +104,30 @@ def user_account_settings(request):
 def list_items(request):
     page = 'items'
 
-    items_filter = ItemFilter(request.GET, queryset=ItemWeapon.objects.all())
-    items = items_filter.qs
+    order_by = request.GET.get('order_by', 'name')
+    sort = request.GET.get('sort', 'descending')
 
-    print(db_items)
+    if sort == 'ascending':
+        items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
+        items = items_filter.qs.order_by('-' + order_by)
+    else:
+        items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
+        items = items_filter.qs.order_by(order_by)
 
-    context = {'page': page, 'items': items, 'items_filter': items_filter}
+    context = {'page': page,
+               'items': items,
+               'items_filter': items_filter,
+               'order_by': order_by,
+               'sort': sort}
+
     return render(request, 'main/items/item_list.html', context)
 
 
 def item(request, id):
     page = 'item'
 
-    item = db_items.objects.get(id=id)
+    item = Item.objects.get(id=id)
+    price = item.price.split(',')
 
-    context = {'page': page, 'item': item}
+    context = {'page': page, 'item': item, 'price': price}
     return render(request, 'main/items/item.html', context)

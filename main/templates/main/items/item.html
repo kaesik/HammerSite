@@ -4,11 +4,14 @@
 
 <div class="content">
 
-{% if page == "items" %}
-
-<p>Item</p>
-
-{% endif %}
+<h1>{{ item.name }}</h1>
+    <span class="badge badge-warning">{{ price.0 }}</span>
+    <span class="badge badge-warning">{{ price.1 }}</span>
+    <span class="badge badge-warning">{{ price.2 }}</span>
+    <hr>
+<p>Group:{{ item.group }}</p>
+<p>Desc: {{ item.description }}</p>
+<p>Source: {{ item.source }}</p>
 
 </div>
 

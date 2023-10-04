@@ -37,9 +37,16 @@
                     <table class="table table-hover table-product" style="width:100%">
                         <thead>
                         <tr>
-                            <th>name</th>
-                            <th>group</th>
-                            <th>source</th>
+                            {% if sort == "ascending" %}
+                                <th>name<a class="mdi mdi-chevron-up" href="?order_by=name&sort=descending"></a></th>
+                                <th>group<a class="mdi mdi-chevron-up" href="?order_by=group&sort=descending"></a></th>
+                                <th>source<a class="mdi mdi-chevron-up" href="?order_by=source&sort=descending"></a></th>
+                            {% elif sort == "descending" %}
+                                <th>name<a class="mdi mdi-chevron-down" href="?order_by=name&sort=ascending"></a></th>
+                                <th>group<a class="mdi mdi-chevron-down" href="?order_by=group&sort=ascending"></a></th>
+                                <th>source<a class="mdi mdi-chevron-down" href="?order_by=source&sort=ascending"></a></th>
+                            {% endif %}
+
                         </tr>
                         </thead>
                         <tbody>

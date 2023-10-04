@@ -5,7 +5,3 @@ from .models import *
 
 admin.site.register(User)
 admin.site.register(Item)
-admin.site.register(ItemWeapon)
-admin.site.register(ItemArmour)
-admin.site.register(ItemAmmunition)
-admin.site.register(ItemOther)
