@@ -119,7 +119,6 @@ def list_items(request):
                'items_filter': items_filter,
                'order_by': order_by,
                'sort': sort}
-
     return render(request, 'main/items/item_list.html', context)
 
 
