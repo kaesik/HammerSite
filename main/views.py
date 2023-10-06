@@ -4,10 +4,12 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .models import User, Item
+from .tables import ItemTable
 from .forms import UserForm, MyUserCreationForm
 from .filters import ItemFilter
 from itertools import chain
+from django_tables2 import SingleTableView
 
 
 def home_page(request):
@@ -107,6 +109,13 @@ def list_items(request):
     order_by = request.GET.get('order_by', 'name')
     sort = request.GET.get('sort', 'descending')
 
+    class ItemListView(SingleTableView):
+        model = Item
+        table_class = ItemTable
+        # template_name = 'main/items/item_list.html'
+    table = ItemListView()
+
+
     if sort == 'ascending':
         items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
         items = items_filter.qs.order_by('-' + order_by)
@@ -118,7 +127,8 @@ def list_items(request):
                'items': items,
                'items_filter': items_filter,
                'order_by': order_by,
-               'sort': sort}
+               'sort': sort,
+               'table': table}
     return render(request, 'main/items/item_list.html', context)
 
 
