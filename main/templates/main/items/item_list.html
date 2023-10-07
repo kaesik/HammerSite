@@ -1,75 +1,73 @@
 {% extends 'main.html' %}
 {% load filter_tags %}
 {% load widget_tweaks %}
-{% load render_table from django_tables2 %}
 
 {% block content %}
 
     <div class="content">
-        {% render_table table %}
         {% if page == "items" %}
 
-{#            <div class="card card-default">#}
-{#                <div class="card-header">#}
-{#                    <h2>Items</h2>#}
-{#                </div>#}
-{#                <div class="card-body">#}
-{##}
-{#                    <form method="GET">#}
-{#                        {% csrf_token %}#}
-{##}
-{#                        <div class="row">#}
-{#                            {% for field in items_filter.form %}#}
-{#                                <div class="col-sm-3">#}
-{#                                    <div class="form-group">#}
-{#                                        <label for="{{ field.name }}">{{ field.name.capitalize }}</label>#}
-{#                                        {{ field|attr:"class:form-control" }}#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            {% endfor %}#}
-{#                            <div class="col-sm-3">#}
-{#                                <div class="form-group d-flex align-items-center justify-content-center">#}
-{#                                    <button type="submit" class="btn btn-primary">Search</button>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </form>#}
-{##}
-{#                    <table class="table table-hover table-product" style="width:100%">#}
-{#                        <thead>#}
-{#                        <tr>#}
-{#                            {% if sort == "ascending" %}#}
-{#                                <th>name<a class="mdi mdi-chevron-up" href="?order_by=name&sort=descending"></a></th>#}
-{#                                <th>group<a class="mdi mdi-chevron-up" href="?order_by=group&sort=descending"></a></th>#}
-{#                                <th>source<a class="mdi mdi-chevron-up" href="?order_by=source&sort=descending"></a></th>#}
-{#                            {% elif sort == "descending" %}#}
-{#                                <th>name<a class="mdi mdi-chevron-down" href="?order_by=name&sort=ascending"></a></th>#}
-{#                                <th>group<a class="mdi mdi-chevron-down" href="?order_by=group&sort=ascending"></a></th>#}
-{#                                <th>source<a class="mdi mdi-chevron-down" href="?order_by=source&sort=ascending"></a></th>#}
-{#                            {% endif %}#}
-{##}
-{#                        </tr>#}
-{#                        </thead>#}
-{#                        <tbody>#}
-{#                        {% for item in items %}#}
-{#                            {% if item.name %}#}
-{#                                <tr>#}
-{#                                    <td><a href="{% url 'item' item.id %}">{{ item.name }}</a></td>#}
-{#                                    <td>#}
-{#                                        {% with item.group|split:"," as groups %}#}
-{#                                            {% for group in groups %}#}
-{#                                                <a href="#">{{ group }}</a>#}
-{#                                            {% endfor %}#}
-{#                                        {% endwith %}#}
-{#                                    </td>#}
-{#                                    <td><a href="#">{{ item.source }}</a></td>#}
-{#                                </tr>#}
-{#                            {% endif %}#}
-{#                        {% endfor %}#}
-{#                        </tbody>#}
-{#                    </table>#}
-{#                </div>#}
-{#            </div>#}
+            <div class="card card-default">
+                <div class="card-header">
+                    <h2>Items</h2>
+                </div>
+                <div class="card-body">
+
+                    <form method="GET">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            {% for field in items_filter.form %}
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="{{ field.name }}">{{ field.name.capitalize }}</label>
+                                        {{ field|attr:"class:form-control" }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="col-sm-3">
+                                <div class="form-group d-flex align-items-center justify-content-center">
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <table class="table table-hover table-product" style="width:100%">
+                        <thead>
+                        <tr>
+                            {% if sort == "ascending" %}
+                                <th>name<a class="mdi mdi-chevron-up" href="?order_by=name&sort=descending"></a></th>
+                                <th>group<a class="mdi mdi-chevron-up" href="?order_by=group&sort=descending"></a></th>
+                                <th>source<a class="mdi mdi-chevron-up" href="?order_by=source&sort=descending"></a></th>
+                            {% elif sort == "descending" %}
+                                <th>name<a class="mdi mdi-chevron-down" href="?order_by=name&sort=ascending"></a></th>
+                                <th>group<a class="mdi mdi-chevron-down" href="?order_by=group&sort=ascending"></a></th>
+                                <th>source<a class="mdi mdi-chevron-down" href="?order_by=source&sort=ascending"></a></th>
+                            {% endif %}
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in items %}
+                            {% if item.name %}
+                                <tr>
+                                    <td><a href="{% url 'item' item.id %}">{{ item.name }}</a></td>
+                                    <td>
+                                        {% with item.group|split:"," as groups %}
+                                            {% for group in groups %}
+                                                <a href="#">{{ group }}</a>
+                                            {% endfor %}
+                                        {% endwith %}
+                                    </td>
+                                    <td><a href="#">{{ item.source }}</a></td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
         {% endif %}
 

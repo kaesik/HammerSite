@@ -16,4 +16,5 @@ urlpatterns = [
 
     path('list/items/', views.list_items, name='list-items'),
     path('list/items/?<str:id>', views.item, name='item'),
+    path('item-list/', views.ItemListView.as_view(), name='item-list'),
 ]

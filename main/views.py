@@ -109,11 +109,8 @@ def list_items(request):
     order_by = request.GET.get('order_by', 'name')
     sort = request.GET.get('sort', 'descending')
 
-    class ItemListView(SingleTableView):
-        model = Item
-        table_class = ItemTable
-        # template_name = 'main/items/item_list.html'
-    table = ItemListView()
+
+    table = 'table'
 
 
     if sort == 'ascending':
@@ -140,3 +137,8 @@ def item(request, id):
 
     context = {'page': page, 'item': item, 'price': price}
     return render(request, 'main/items/item.html', context)
+
+class ItemListView(SingleTableView):
+    table_class = ItemTable
+    queryset = Item.objects.all()
+    template_name = 'main/items/django_list2.html'
