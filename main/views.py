@@ -141,4 +141,4 @@ def item(request, id):
 class ItemListView(SingleTableView):
     table_class = ItemTable
     queryset = Item.objects.all()
-    template_name = 'main/items/django_list2.html'
+    template_name = 'main/items/item_list.html'
