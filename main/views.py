@@ -109,10 +109,6 @@ def list_items(request):
     order_by = request.GET.get('order_by', 'name')
     sort = request.GET.get('sort', 'descending')
 
-
-    table = 'table'
-
-
     if sort == 'ascending':
         items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
         items = items_filter.qs.order_by('-' + order_by)
@@ -124,8 +120,8 @@ def list_items(request):
                'items': items,
                'items_filter': items_filter,
                'order_by': order_by,
-               'sort': sort,
-               'table': table}
+               'sort': sort
+               }
     return render(request, 'main/items/item_list.html', context)
 
 
