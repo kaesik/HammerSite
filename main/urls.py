@@ -15,6 +15,9 @@ urlpatterns = [
     path('user-account-settings/', views.user_account_settings, name='user-account-settings'),
 
     path('list/items/', views.list_items, name='list-items'),
-    path('list/items2/', views.ItemListView.as_view(), name='list-items'),
+    path('list/items2/', views.ItemListView.as_view(), name='list-items2'),
     path('list/items/?<str:id>', views.item, name='item'),
+
+    path('list/qualities-flaws/', views.list_qualities_flaws, name='list-qualities-flaws'),
+    path('list/qualities-flaws/?<str:id>', views.qualities_flaws, name='qualities-flaws')
 ]

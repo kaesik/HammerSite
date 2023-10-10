@@ -1,90 +1,97 @@
 {% load static %}
 
 <aside class="left-sidebar sidebar-dark" id="left-sidebar">
-          <div id="sidebar" class="sidebar sidebar-with-footer">
-            <!-- Aplication Brand -->
-            <div class="app-brand">
-              <a href="{% url 'home' %}">
+    <div id="sidebar" class="sidebar sidebar-with-footer">
+        <!-- Aplication Brand -->
+        <div class="app-brand">
+            <a href="{% url 'home' %}">
                 <img src="{% static 'images/logo.png' %}" alt="Logo" width="50px" height="50px">
                 <span class="brand-name">HammerSite</span>
-              </a>
-            </div>
-            <!-- begin sidebar scrollbar -->
-            <div class="sidebar-left" data-simplebar style="height: 100%;">
-              <!-- sidebar menu -->
-              <ul class="nav sidebar-inner" id="sidebar-menu">
+            </a>
+        </div>
+        <!-- begin sidebar scrollbar -->
+        <div class="sidebar-left" data-simplebar style="height: 100%;">
+            <!-- sidebar menu -->
+            <ul class="nav sidebar-inner" id="sidebar-menu">
 
-                  <li class="active" >
+                <li class="active">
                     <a class="sidenav-item-link" href="{% url 'home' %}">
-                      <i class="mdi mdi-briefcase-account-outline"></i>
-                      <span class="nav-text">Main Page</span>
+                        <i class="mdi mdi-briefcase-account-outline"></i>
+                        <span class="nav-text">Main Page</span>
                     </a>
-                  </li>
+                </li>
 
-                  <li class="section-title">
-                    Lists
-                  </li>
+                <li class="section-title">
+                    Wiki
+                </li>
 
-                  <li>
-                    <a class="sidenav-item-link" href="{% url 'list-items' %}">
-                      <i class="mdi mdi-wrench"></i>
-                      <span class="nav-text">Items</span>
-                    </a>
-                  </li>
-
-                  <li>
-                    <a class="sidenav-item-link" href="#">
-                      <i class="mdi mdi-wrench"></i>
-                      <span class="nav-text">WORK IN PROGRES</span>
-                    </a>
-                  </li>
-
-                  <li class="section-title">
-                    TITLE 2
-                  </li>
-
-                  <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#WORKINPROGRES"
-                      aria-expanded="false" aria-controls="#">
-                      <i class="mdi mdi-wrench"></i>
-                      <span class="nav-text">
-                          WORK IN PROGRES
+                <li class="has-sub">
+                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse"
+                       data-target="#WORKINPROGRES"
+                       aria-expanded="false" aria-controls="#">
+                        <i class="mdi mdi-wrench"></i>
+                        <span class="nav-text">
+                          LISTS
                       </span> <b class="caret"></b>
                     </a>
-                    <ul  class="collapse"  id="WORKINPROGRES"
-                      data-parent="#sidebar-menu">
-                      <div class="sub-menu">
+                    <ul class="collapse" id="WORKINPROGRES"
+                        data-parent="#sidebar-menu">
+                        <div class="sub-menu">
 
-                            <li >
-                              <a class="sidenav-item-link" href="#">
+                            <li>
+                                <a class="sidenav-item-link" href="{% url 'list-items' %}">
                                 <span class="nav-text">
-                                    WORK IN PROGRES
+                                    Items
                                 </span>
-                              </a>
+                                </a>
                             </li>
 
-                      </div>
+                            <li>
+                                <a class="sidenav-item-link" href="{% url 'list-qualities-flaws' %}">
+                                <span class="nav-text">
+                                    Qualities and Flaws
+                                </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="sidenav-item-link" href="{% url 'list-items2' %}">
+                                <span class="nav-text">
+                                    Items2
+                                </span>
+                                </a>
+                            </li>
+
+                        </div>
                     </ul>
-                  </li>
-              </ul>
-            </div>
-            {% if request.user.is_authenticated %}
-            <div class="sidebar-footer">
-              <div class="sidebar-footer-content">
-                <ul class="d-flex">
-                  <li>
-                    <a href="{% url 'user-account-settings' %}" data-toggle="tooltip" title="Account settings">
-                        <i class="mdi mdi-settings"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-toggle="tooltip" title="WORK IN PROGRES">
+                </li>
+
+                <li>
+                    <a class="sidenav-item-link" href="#">
                         <i class="mdi mdi-wrench"></i>
+                        <span class="nav-text">WORK IN PROGRES</span>
                     </a>
-                  </li>
-                </ul>
-              </div>
+                </li>
+
+            </ul>
+        </div>
+        {% if request.user.is_authenticated %}
+            <div class="sidebar-footer">
+                <div class="sidebar-footer-content">
+                    <ul class="d-flex">
+                        <li>
+                            <a href="{% url 'user-account-settings' %}" data-toggle="tooltip" title="Account settings">
+                                <i class="mdi mdi-settings"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="tooltip" title="WORK IN PROGRES">
+                                <i class="mdi mdi-wrench"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            {% endif %}
-          </div>
-        </aside>
+        {% endif %}
+    </div>
+</aside>

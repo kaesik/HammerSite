@@ -12,6 +12,12 @@ from itertools import chain
 from django_tables2 import SingleTableView
 
 
+class ItemListView(SingleTableView):
+    table_class = ItemTable
+    queryset = Item.objects.all()
+    template_name = 'main/items/item_list.html'
+
+
 def home_page(request):
     title = 'HammerSite'
 
@@ -104,8 +110,6 @@ def user_account_settings(request):
 
 
 def list_items(request):
-    page = 'items'
-
     order_by = request.GET.get('order_by', 'name')
     sort = request.GET.get('sort', 'descending')
 
@@ -116,16 +120,34 @@ def list_items(request):
         items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
         items = items_filter.qs.order_by(order_by)
 
-    context = {'page': page,
-               'items': items,
-               'items_filter': items_filter,
-               'order_by': order_by,
-               'sort': sort
-               }
+    context = {'items': items, 'items_filter': items_filter, 'order_by': order_by, 'sort': sort}
     return render(request, 'main/items/item_list.html', context)
 
 
 def item(request, id):
+    item = Item.objects.get(id=id)
+    price = item.price.split(',')
+
+    context = {'item': item, 'price': price}
+    return render(request, 'main/items/item.html', context)
+
+
+def list_qualities_flaws(request):
+    order_by = request.GET.get('order_by', 'name')
+    sort = request.GET.get('sort', 'descending')
+
+    if sort == 'ascending':
+        items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
+        items = items_filter.qs.order_by('-' + order_by)
+    else:
+        items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
+        items = items_filter.qs.order_by(order_by)
+
+    context = {'items': items, 'items_filter': items_filter, 'order_by': order_by, 'sort': sort}
+    return render(request, 'main/items/item_list.html', context)
+
+
+def qualities_flaws(request, id):
     page = 'item'
 
     item = Item.objects.get(id=id)
@@ -133,8 +155,3 @@ def item(request, id):
 
     context = {'page': page, 'item': item, 'price': price}
     return render(request, 'main/items/item.html', context)
-
-class ItemListView(SingleTableView):
-    table_class = ItemTable
-    queryset = Item.objects.all()
-    template_name = 'main/items/item_list.html'

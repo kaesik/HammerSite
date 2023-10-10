@@ -18,7 +18,7 @@ class Item(models.Model):
     group = models.CharField(max_length=256, null=True)
     source = models.CharField(max_length=256, null=True)
     availability = models.CharField(max_length=256, null=True)
-    description = models.CharField(max_length=512, null=True)
+    description = models.CharField(max_length=8000, null=True)
     encumbrance = models.CharField(max_length=256, null=True)
     price = models.CharField(max_length=256, null=True)
 
@@ -44,8 +44,9 @@ class QualityFlaw(models.Model):
     id = models.CharField(max_length=256, primary_key=True)
     name = models.CharField(max_length=256, null=True)
     group = models.CharField(max_length=256, null=True)
+    quality_or_flaw = models.CharField(max_length=256, null=True)
     source = models.CharField(max_length=256, null=True)
-    description = models.CharField(max_length=512, null=True)
+    description = models.CharField(max_length=8000, null=True)
 
     def __str__(self):
         return self.name
