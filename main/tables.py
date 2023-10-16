@@ -5,5 +5,10 @@ from .models import Item
 class ItemTable(tables.Table):
     class Meta:
         model = Item
-        # template_name = "django_tables2/bootstrap.html"
+        fields = ['name', 'group', 'source']
+
+
+class QualityFlawTable(tables.Table):
+    class Meta:
+        model = Item
         fields = ['name', 'group', 'source']

@@ -4,10 +4,10 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import User, Item
-from .tables import ItemTable
+from .models import User, Item, QualityFlaw
+from .tables import ItemTable, QualityFlawTable
 from .forms import UserForm, MyUserCreationForm
-from .filters import ItemFilter
+from .filters import ItemFilter, QualityFlawFilter
 from itertools import chain
 from django_tables2 import SingleTableView
 
@@ -16,6 +16,12 @@ class ItemListView(SingleTableView):
     table_class = ItemTable
     queryset = Item.objects.all()
     template_name = 'main/items/item_list.html'
+
+
+class QualityFlawListView(SingleTableView):
+    table_class = QualityFlawTable
+    queryset = QualityFlaw.objects.all()
+    template_name = 'main/qualities/quality_flaw_list.html'
 
 
 def home_page(request):
@@ -120,7 +126,7 @@ def list_items(request):
         items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
         items = items_filter.qs.order_by(order_by)
 
-    context = {'items': items, 'items_filter': items_filter, 'order_by': order_by, 'sort': sort}
+    context = {'items': items, 'filter': items_filter, 'order_by': order_by, 'sort': sort}
     return render(request, 'main/items/item_list.html', context)
 
 
@@ -137,21 +143,18 @@ def list_qualities_flaws(request):
     sort = request.GET.get('sort', 'descending')
 
     if sort == 'ascending':
-        items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
-        items = items_filter.qs.order_by('-' + order_by)
+        qualities_flaws_filter = QualityFlawFilter(request.GET, queryset=QualityFlaw.objects.all())
+        qualities_flaws = qualities_flaws_filter.qs.order_by('-' + order_by)
     else:
-        items_filter = ItemFilter(request.GET, queryset=Item.objects.all())
-        items = items_filter.qs.order_by(order_by)
+        qualities_flaws_filter = QualityFlawFilter(request.GET, queryset=QualityFlaw.objects.all())
+        qualities_flaws = qualities_flaws_filter.qs.order_by(order_by)
 
-    context = {'items': items, 'items_filter': items_filter, 'order_by': order_by, 'sort': sort}
-    return render(request, 'main/items/item_list.html', context)
+    context = {'qualities_flaws': qualities_flaws, 'filter': qualities_flaws_filter, 'order_by': order_by, 'sort': sort}
+    return render(request, 'main/qualities/qualities_flaws_list.html', context)
 
 
 def qualities_flaws(request, id):
-    page = 'item'
+    qualities_flaws = QualityFlaw.objects.get(id=id)
 
-    item = Item.objects.get(id=id)
-    price = item.price.split(',')
-
-    context = {'page': page, 'item': item, 'price': price}
-    return render(request, 'main/items/item.html', context)
+    context = {'qualities_flaws': qualities_flaws}
+    return render(request, 'main/qualities/qualities_flaws.html', context)

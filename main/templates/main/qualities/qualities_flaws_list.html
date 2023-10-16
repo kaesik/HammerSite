@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% load filter_tags %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+    <div class="content">
+        <div class="card card-default">
+            <div class="card-header">
+                <h2>Qualities and Flaws</h2>
+            </div>
+            <div class="card-body">
+
+                <form method="GET">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        {% for field in filter.form %}
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="{{ field.name }}">{{ field.name.capitalize }}</label>
+                                    {{ field|attr:"class:form-control" }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="col-sm-3">
+                            <div class="form-group d-flex align-items-center justify-content-center">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-hover table-product" style="width:100%">
+                    <thead>
+                    <tr>
+                        {% if sort == "ascending" %}
+                            <th>name<a class="mdi mdi-chevron-up" href="?order_by=name&sort=descending"></a></th>
+                            <th>group<a class="mdi mdi-chevron-up" href="?order_by=group&sort=descending"></a></th>
+                            <th>source<a class="mdi mdi-chevron-up" href="?order_by=source&sort=descending"></a></th>
+                        {% elif sort == "descending" %}
+                            <th>name<a class="mdi mdi-chevron-down" href="?order_by=name&sort=ascending"></a></th>
+                            <th>group<a class="mdi mdi-chevron-down" href="?order_by=group&sort=ascending"></a></th>
+                            <th>source<a class="mdi mdi-chevron-down" href="?order_by=source&sort=ascending"></a></th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for quality_flaw in qualities_flaws %}
+                        {% if quality_flaw.name %}
+                            <tr>
+                                <td><a href="{% url 'qualities-flaws' quality_flaw.id %}">{{ quality_flaw.name }}</a></td>
+                                <td>
+                                    {% with quality_flaw.group|split:"," as groups %}
+                                        {% for group in groups %}
+                                            <a href="#">{{ group }}</a>
+                                        {% endfor %}
+                                    {% endwith %}
+                                </td>
+                                <td><a href="#">{{ quality_flaw.source }}</a></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
