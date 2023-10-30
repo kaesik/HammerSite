@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="content">
+
+<h1>{{ qualities_flaws.name }}</h1>
+    <p>{{ qualities_flaws.quality_or_flaw }}</p>
+    <hr>
+<p>Group:{{ qualities_flaws.group }}</p>
+<p>Desc: {{ qualities_flaws.description }}</p>
+<p>Source: {{ qualities_flaws.source }}</p>
+
+</div>
+
+{% endblock %}
