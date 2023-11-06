@@ -12,6 +12,18 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username']
 
 
+class QualityFlaw(models.Model):
+    id = models.CharField(primary_key=True)
+    name = models.CharField(null=True)
+    group = models.CharField(null=True)
+    quality_or_flaw = models.CharField( null=True)
+    source = models.CharField(null=True)
+    description = models.CharField(null=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Item(models.Model):
     id = models.CharField(primary_key=True)
     name = models.CharField(null=True)
@@ -40,21 +52,10 @@ class Item(models.Model):
         return self.name
 
 
-class QualityFlaw(models.Model):
-    id = models.CharField(primary_key=True)
-    name = models.CharField(null=True)
-    group = models.CharField(null=True)
-    quality_or_flaw = models.CharField( null=True)
-    source = models.CharField(null=True)
-    description = models.CharField(null=True)
-
-    def __str__(self):
-        return self.name
-
-
 class Attribute(models.Model):
     id = models.CharField(primary_key=True)
     name = models.CharField(null=True)
+    short_name = models.CharField(null=True)
     description = models.CharField(null=True)
 
     def __str__(self):
@@ -64,7 +65,7 @@ class Attribute(models.Model):
 class Skill(models.Model):
     id = models.CharField(primary_key=True)
     name = models.CharField(null=True)
-    attribute = models.CharField(null=True)
+    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE, null=True)
     basic_advance = models.CharField(null=True)
     grouped = models.BooleanField(null=True)
     description = models.CharField(null=True)
@@ -99,6 +100,7 @@ class Race(models.Model):
     strength = models.CharField(null=True)
     toughness = models.CharField(null=True)
     agility = models.CharField(null=True)
+    initiative = models.CharField(null=True)
     dexterity = models.CharField(null=True)
     intelligence = models.CharField(null=True)
     willpower = models.CharField(null=True)
@@ -156,7 +158,7 @@ class Career(models.Model):
     summary = models.CharField(null=True)
     description = models.CharField(null=True)
     advance_scheme = models.CharField(null=True)
-    career_path = models.CharField(null=True)
+    career_path = models.ManyToManyField(CareerPath)
     quotations = models.CharField(null=True)
     adventuring = models.CharField(null=True)
     source = models.CharField(null=True)

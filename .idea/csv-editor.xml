@@ -3,35 +3,49 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="C:\Users\kamil\Downloads\main_item_rows.csv">
+        <entry key="C:\Users\kamil\Downloads\main_attribute_rows.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="C:\Users\kamil\Downloads\main_itemammunition_rows.csv">
+        <entry key="C:\Users\kamil\Downloads\main_careerpath_rows (1).csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="C:\Users\kamil\Downloads\main_itemarmour_rows.csv">
+        <entry key="C:\Users\kamil\Downloads\main_careerpath_rows.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="C:\Users\kamil\Downloads\main_itemother_rows.csv">
+        <entry key="C:\Users\kamil\Downloads\main_race_rows.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="C:\Users\kamil\Downloads\main_itemweapon_rows.csv">
+        <entry key="C:\Users\kamil\Downloads\main_skill_rows (1).csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="C:\Users\kamil\Downloads\main_skill_rows.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="C:\Users\kamil\Downloads\main_talent_rows.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
