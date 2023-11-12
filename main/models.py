@@ -133,6 +133,7 @@ class Class(models.Model):
     name = models.CharField(null=True)
     description = models.CharField(null=True)
     trappings = models.CharField(null=True)
+    careers = models.CharField(null=True)
 
     def __str__(self):
         return self.name
@@ -158,7 +159,7 @@ class Career(models.Model):
     summary = models.CharField(null=True)
     description = models.CharField(null=True)
     advance_scheme = models.CharField(null=True)
-    career_path = models.ManyToManyField(CareerPath)
+    career_path = models.CharField(null=True)
     quotations = models.CharField(null=True)
     adventuring = models.CharField(null=True)
     source = models.CharField(null=True)
