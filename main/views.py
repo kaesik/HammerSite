@@ -158,3 +158,9 @@ def qualities_flaws(request, id):
 
     context = {'qualities_flaws': qualities_flaws}
     return render(request, 'main/qualities/qualities_flaws.html', context)
+
+def create_character(request):
+    title = 'Create Character'
+
+    context = {'title': title}
+    return render(request, 'main/character/create_character.html', context)

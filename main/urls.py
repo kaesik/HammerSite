@@ -19,5 +19,7 @@ urlpatterns = [
     path('list/items/?<str:id>', views.item, name='item'),
 
     path('list/qualities-flaws/', views.list_qualities_flaws, name='list-qualities-flaws'),
-    path('list/qualities-flaws/?<str:id>', views.qualities_flaws, name='qualities-flaws')
+    path('list/qualities-flaws/?<str:id>', views.qualities_flaws, name='qualities-flaws'),
+
+    path('character/create/', views.create_character, name='create-character'),
 ]

@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div class="content">
+        <h1>Create Character</h1>
+        <hr>
+        <form>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-9">
+                        <label for="#">Name</label>
+                        <input type="email" class="form-control rounded-0" id="#" placeholder="Hans">
+                    </div>
+                    <div class="col-3">
+                        <a>
+                            <button type="submit" class="btn btn-primary btn-pill">Generate</button>
+                        </a>
+                    </div>
+                    <span class="mt-2 d-block">What should others call you?</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="#">Species</label>
+                <select class="form-control rounded-0" id="#">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="mt-2 d-block">You're more of a dwarf guy, aren't you?</span>
+            </div>
+
+            <div class="form-group">
+                <label for="#">Career</label>
+                <select class="form-control rounded-0" id="#">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <span class="mt-2 d-block">Career description</span>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-3">
+
+                        <label for="#">Fate</label>
+                        <input type="text" class="form-control" placeholder="col-3">
+                    </div>
+                    <div class="col-3">
+                        <label for="#">Fortune</label>
+                        <input type="text" class="form-control" placeholder="col-3">
+                    </div>
+                    <div class="col-3">
+                        <label for="#">Resilience</label>
+                        <input type="text" class="form-control" placeholder="col-3">
+                    </div>
+                    <div class="col-3">
+                        <label for="#">Resolve</label>
+                        <input type="text" class="form-control" placeholder="col-3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="btn btn-primary btn-pill">Submit</button>
+                <button type="submit" class="btn btn-light btn-pill">Cancel</button>
+            </div>
+
+        </form>
+
+        <hr>
+        </form>
+    </div>
+
+{% endblock %}
